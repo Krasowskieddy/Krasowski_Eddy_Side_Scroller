@@ -28,8 +28,7 @@ public class Chara_Controler : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded ) rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         
-
-
+ 
 
 
         /*
