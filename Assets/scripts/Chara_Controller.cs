@@ -8,8 +8,7 @@ public class Chara_Controler : MonoBehaviour
 
     [Header("Gravity/jump")]
     [SerializeField] float gravity = -10f;
-    [SerializeField] float jumpForce = 1.5f;
-    [SerializeField] GameObject jumpEffect;
+    public float jumpForce = 1.5f;
     Rigidbody2D rb;
     float inputX;
     public LayerMask groundLayer;
@@ -29,14 +28,6 @@ public class Chara_Controler : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded ) rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         
-       bool isBoosted = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, LayerMask.GetMask("Boost"));
-
-        if ((isBoosted) = jumpEffect)
-        {
-            jumpForce = 15f;
-        }
-
-
         /*
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         input.Normalize();
