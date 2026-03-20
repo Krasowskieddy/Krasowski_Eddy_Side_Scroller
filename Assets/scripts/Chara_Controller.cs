@@ -6,15 +6,21 @@ public class Chara_Controler : MonoBehaviour
 {
     public Transform chara;
     public Transform boostPlace;
+    public Transform dashPlace;
+    public Transform doubleJumpPlace;
 
     [Header("Move variables")]
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float dash = 100f;
-    private bool canDash = true;
-    [SerializeField] float maxJump = 1;
+    private bool bDash = true;
+    private float maxDash = 1;
+    [SerializeField] float maxJump = 0;
 
     // set de toute les variables de compétences
-    public bool isBoosted;
+    private bool isBoosted = false;
+    private bool canDash = false;
+    private bool dJump = false;
+
     [SerializeField] float boost = 8f;
     [Header("Gravity/jump")]
     [SerializeField] float gravity = -10f;
@@ -51,29 +57,42 @@ public class Chara_Controler : MonoBehaviour
         {
             isBoosted = true;
         }
+        if (Vector2.Distance(chara.position, dashPlace.position) < 10f)
+        {
+           canDash = true;
+        }
+        if (Vector2.Distance(chara.position, doubleJumpPlace.position) < 10f)
+        {
+            dJump =true;
+        }
         if (isGrounded)
         {
             maxJump = 1;
+            maxDash = 1;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && maxDash>0 && canDash)
         {
-            canDash = false;
+            bDash = false;
             rb.AddForce(new Vector2(inputX * dash, 0f), ForceMode2D.Impulse);
             StartCoroutine(DashCooldown());
+            maxDash --;
+        }
+        if (dJump == true)
+        {
+            maxJump = 1;
         }
 
     }
-
     IEnumerator DashCooldown()
     {
         yield return new WaitForSeconds(0.3f);
-        canDash = true;
+        bDash = true;
     }
 
     private void FixedUpdate()
     {
         var v = rb.linearVelocity;
-        if (canDash) v.x = inputX * moveSpeed;
+        if (bDash) v.x = inputX * moveSpeed;
 
         rb.linearVelocity = v;
 
