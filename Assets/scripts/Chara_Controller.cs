@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Chara_Controler : MonoBehaviour
@@ -8,7 +9,11 @@ public class Chara_Controler : MonoBehaviour
 
     [Header("Move variables")]
     [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float acceleration = 20f;
+    [SerializeField] float dash = 100f;
+    private bool canDash = true;
+    [SerializeField] float maxJump = 1;
+
+    // set de toute les variables de compétences
     public bool isBoosted;
     [SerializeField] float boost = 8f;
     [Header("Gravity/jump")]
@@ -31,8 +36,12 @@ public class Chara_Controler : MonoBehaviour
 
         bool isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, groundLayer);
 
-        if (Input.GetButtonDown("Jump") && isGrounded ) rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        if (Input.GetButtonDown("Jump") && maxJump >0)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
+            maxJump --;
+        }
         if (isBoosted == true)
         {
             jumpForce = 15f;
@@ -42,21 +51,32 @@ public class Chara_Controler : MonoBehaviour
         {
             isBoosted = true;
         }
+        if (isGrounded)
+        {
+            maxJump = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            canDash = false;
+            rb.AddForce(new Vector2(inputX * dash, 0f), ForceMode2D.Impulse);
+            StartCoroutine(DashCooldown());
+        }
 
-        /*
-        input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        input.Normalize();
-        */
+    }
 
+    IEnumerator DashCooldown()
+    {
+        yield return new WaitForSeconds(0.3f);
+        canDash = true;
     }
 
     private void FixedUpdate()
     {
         var v = rb.linearVelocity;
-        v.x = inputX * moveSpeed;
+        if (canDash) v.x = inputX * moveSpeed;
 
         rb.linearVelocity = v;
 
-       // rb.linearVelocity = input * moveSpeed;
+       
     }
 }
