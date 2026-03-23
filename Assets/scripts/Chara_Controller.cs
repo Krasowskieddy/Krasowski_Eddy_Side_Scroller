@@ -7,7 +7,8 @@ public class Chara_Controler : MonoBehaviour
     public Transform chara;
     public Transform boostPlace;
     public Transform dashPlace;
-    public Transform doubleJumpPlace;
+    
+
 
     [Header("Move variables")]
     [SerializeField] float moveSpeed = 5f;
@@ -19,7 +20,6 @@ public class Chara_Controler : MonoBehaviour
     // set de toute les variables de compétences
     private bool isBoosted = false;
     private bool canDash = false;
-    private bool dJump = false;
 
     [SerializeField] float boost = 8f;
     [Header("Gravity/jump")]
@@ -61,15 +61,13 @@ public class Chara_Controler : MonoBehaviour
         {
            canDash = true;
         }
-        if (Vector2.Distance(chara.position, doubleJumpPlace.position) < 10f)
-        {
-            dJump =true;
-        }
+
         if (isGrounded)
         {
             maxJump = 1;
             maxDash = 1;
         }
+
         if (Input.GetKeyDown(KeyCode.LeftShift) && maxDash>0 && canDash)
         {
             bDash = false;
@@ -77,6 +75,7 @@ public class Chara_Controler : MonoBehaviour
             StartCoroutine(DashCooldown());
             maxDash --;
         }
+
         if (dJump == true)
         {
             maxJump = 1;
