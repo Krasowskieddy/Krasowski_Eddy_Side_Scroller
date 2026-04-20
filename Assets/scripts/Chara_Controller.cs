@@ -12,7 +12,9 @@ public class Chara_Controler : MonoBehaviour
 
     [Header("Move variables")]
     [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float dash = 100f;
+    [SerializeField] float dash = 100f;            
+    [SerializeField] float Hp = 1f;
+    [SerializeField] float Dmg = 1f;
     private bool bDash = true;
     private float maxDash = 1;
     [SerializeField] float maxJump = 0;
@@ -33,6 +35,7 @@ public class Chara_Controler : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -75,12 +78,6 @@ public class Chara_Controler : MonoBehaviour
             StartCoroutine(DashCooldown());
             maxDash --;
         }
-
-        if (dJump == true)
-        {
-            maxJump = 1;
-        }
-
     }
     IEnumerator DashCooldown()
     {
