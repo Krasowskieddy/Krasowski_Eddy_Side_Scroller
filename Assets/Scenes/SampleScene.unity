@@ -2024,6 +2024,7 @@ MonoBehaviour:
   moveSpeed: 10
   dash: 30
   Hp: 1
+  Dmg: 1
   maxJump: 1
   boost: 8
   gravity: -10

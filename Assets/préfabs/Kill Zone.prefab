@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7578505072912001672}
   - component: {fileID: 6015371660621141922}
+  - component: {fileID: 4349386017639093491}
   m_Layer: 0
   m_Name: Kill Zone
   m_TagString: Kill Zone
@@ -90,3 +91,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4349386017639093491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8796879179781620019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de355e8ad980aab499133504d224c27c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KillPlayer
+  player: {fileID: 0}
+  respawnPoint: {fileID: 0}

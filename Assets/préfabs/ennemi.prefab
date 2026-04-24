@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 8025990972340381927}
   - component: {fileID: 5042062721371721793}
   - component: {fileID: 4424474898861351713}
+  - component: {fileID: 5336478345447897537}
   m_Layer: 0
   m_Name: patrol
   m_TagString: Untagged
@@ -219,6 +220,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5336478345447897537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8475814796647690016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de355e8ad980aab499133504d224c27c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KillPlayer
+  player: {fileID: 0}
+  respawnPoint: {fileID: 0}
 --- !u!1 &8969846259746636344
 GameObject:
   m_ObjectHideFlags: 0
