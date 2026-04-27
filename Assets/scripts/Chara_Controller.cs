@@ -7,7 +7,9 @@ public class Chara_Controler : MonoBehaviour
     public Transform chara;
     public Transform boostPlace;
     public Transform dashPlace;
-    
+    public GameObject player;
+    public Transform respawnPoint;
+
 
 
     [Header("Move variables")]
@@ -43,7 +45,7 @@ public class Chara_Controler : MonoBehaviour
 
         inputX = Input.GetAxisRaw("Horizontal");
 
-        bool isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, groundLayer);
+        bool isGrounded = Physics2D.Raycast(transform.position, Vector2.down,2f, groundLayer);
 
         if (Input.GetButtonDown("Jump") && maxJump >0)
         {
@@ -56,17 +58,20 @@ public class Chara_Controler : MonoBehaviour
             jumpForce = 15f;
         }
 
-        if (Vector2.Distance(chara.position, boostPlace.position) < 10f)
+        if (Vector2.Distance(chara.position, boostPlace.position) < 5f)
         {
             isBoosted = true;
+            player.transform.position = respawnPoint.position;
         }
-        if (Vector2.Distance(chara.position, dashPlace.position) < 10f)
+        if (Vector2.Distance(chara.position, dashPlace.position) < 5f)
         {
            canDash = true;
+           player.transform.position = respawnPoint.position;
         }
 
         if (isGrounded)
         {
+            Debug.Log("Grounded");
             maxJump = 1;
             maxDash = 1;
         }
